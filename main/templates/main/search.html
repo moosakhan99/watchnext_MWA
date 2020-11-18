@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<style>
+    h1{
+        align-self: center;
+        align-items: center;
+        text-align: center;
+    }
+    img
+    {
+    background-image:url("{% static 'default.png' %}");
+    }
+    html{
+        background-color:rgba(43,51,59,0.9);
+        align-content: center;
+    }
+    body{
+        background-color:rgba(43,51,59,0.9);
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        align-content: center;
+    }
+    li{
+        padding: 0;
+        margin: 0;
+        
+    }
+    
+</style>
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+<body>
+    <p><h1>Hi {{uid}},<h1>
+        <img src="{% static 'robo.gif' %}" alt="My image" style="height: 128px;">
+        <h4>This is <b>ranzol</b> your AI friend,<br> I am going to help you decide what to watchNext!</h4>
+        
+        <br>Tell me a movie that you like:
+      </p>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+        <input type="text" placeholder="Enter movie name" name="name" id="name"><br>
+        <br><button  class="subbutton" type="submit" >Search</button>
+        </div>
+        
+    </form>
+    
+    <br>
+    <h2>{{msg}}</h2>
+        <ul style="list-style-type: none;list-style: none;padding: 0;margin: 0;">
+            {% for i,j,k in Movies %}
+                <br>
+                <li>
+                    <a href="/suggestions/{{i}}"><img src="{{k}}"  alt="No image" ></img></a><br>
+                    <a href="/suggestions/{{i}}">    {{i}} ({{j}})</a>
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+        <br>
+        <p>{{error}}</p>
+        <br>
+        <hr>
+        <a href="/logout">Logout</a>
+        <br>
+        
+        
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
